@@ -14,3 +14,9 @@
 .retired {
   color: orangered;
 }
+
+.icon {
+  width: 20px;
+  height: 20px;
+  color: blueviolet;
+}
