@@ -1,14 +1,27 @@
 import styles from "./Reader.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Reader({ items }) {
-  const [selectedIdx, setselectedIdx] = useState(0);
+  const [selectedIdx, setselectedIdx] = useState(() => {
+    const savedIdx = localStorage.getItem("reader-idx");
+    if (savedIdx !== null) {
+      return JSON.parse(savedIdx);
+    }
+    console.log(savedIdx);
+
+    return 0;
+  });
   const handlePrev = () => {
     setselectedIdx(selectedIdx - 1);
   };
   const handleNext = () => {
     setselectedIdx(selectedIdx + 1);
   };
+  useEffect(() => {
+    console.log(selectedIdx);
+
+    localStorage.setItem("reader-idx", JSON.stringify(selectedIdx));
+  }, [selectedIdx]);
   const currentArticle = items[selectedIdx];
   console.log(currentArticle);
 

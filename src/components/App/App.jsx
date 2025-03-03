@@ -17,18 +17,18 @@
 // import Accordion from "../Accordion/Accordion.jsx";
 // import ClickTracker from "../ClickTracker/ClickTracker.jsx";
 // import Sidebar from "../SideBar/SideBar.jsx";
-// import Reader from "../Reader/Reader.jsx";
-// import articles from "../article.json";
+import Reader from "../Reader/Reader.jsx";
+import articles from "../article.json";
 // import { useState, useEffect } from "react";
-import Timer from "../Timer/Timer.jsx";
+// import Timer from "../Timer/Timer.jsx";
 
-export default function App() {
-  return (
-    <>
-      <Timer />
-    </>
-  );
-}
+// export default function App() {
+//   return (
+//     <>
+//       <Timer />
+//     </>
+//   );
+// }
 
 // export default function App() {
 //   const [isOpen, setIsOpen] = useState(false);
@@ -69,15 +69,15 @@ export default function App() {
 //   },
 // ];
 
-// export default function App() {
-//   return (
-//     <>
-//       <h1>Hello</h1>
-//       <Reader items={articles} />
-//       {/* <Accordion items={accordionItems} /> */}
-//     </>
-//   );
-// }
+export default function App() {
+  return (
+    <>
+      <h1>Hello</h1>
+      <Reader items={articles} />
+      {/* <Accordion items={accordionItems} /> */}
+    </>
+  );
+}
 
 // export default function App() {
 //   const [clicks, setClicks] = useState(0);
