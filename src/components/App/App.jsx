@@ -23,7 +23,7 @@ import UserForm from "../UserForm/UserForm.jsx";
 // import articles from "../article.json";
 // import { useState, useEffect } from "react";
 // import Timer from "../Timer/Timer.jsx";
-import { useId, useState, useEffect } from "react";
+import { useId, useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -31,80 +31,91 @@ import { ErrorMessage } from "formik";
 import { fetchArticles } from "../../articleService.js";
 import SearchForm from "../SearchForm/SearchForm.jsx";
 import ArticleList from "../ArticleList/ArticleList.jsx";
+import RefBasics from "../RefBasics/RefBasics.jsx";
+import Player from "../Players/Players.jsx";
+import Timer1 from "../Timer1/Timer1.jsx";
 
 export default function App() {
-  const [clicks, setClicks] = useState(0);
-  const [articles, setArticles] = useState([]);
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-
-  const [searchTerm, setSearchTerm] = useState("");
-  const [page, setPage] = useState(1);
-
-  const handleSearch = async (topic) => {
-    console.log(`${topic}/${Date.now()}`);
-
-    setSearchTerm(`${topic}/${Date.now()}`);
-
-    setPage(1);
-    setArticles([]);
-  };
-
-  useEffect(() => {
-    if (searchTerm === "") {
-      return;
-    }
-    async function getData() {
-      try {
-        setError(false);
-        setIsLoading(true);
-        console.log(searchTerm.split("/")[0]);
-
-        const data = await fetchArticles(searchTerm.split("/")[0], page);
-
-        setArticles((prevArticles) => {
-          return [...prevArticles, ...data];
-        });
-      } catch {
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    getData();
-    console.log(page, searchTerm);
-  }, [page, searchTerm]);
-  // useEffect(() => {
-  //   console.log(clicks);
-
-  //   async function getArticles() {
-  //     try {
-  //       const data = await fetchArticles();
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   getArticles();
-  // }, [clicks]);
-
   return (
     <div>
-      <h1>HTTP</h1>
-      <SearchForm onSearch={handleSearch} />
-
-      {error && <b>Whops there was an error plz reload...</b>}
-
-      {articles.length > 0 && <ArticleList items={articles} />}
-      {isLoading && <b>Loading data, please wait...</b>}
-
-      {articles.length > 0 && !isLoading && (
-        <button onClick={() => setPage(page + 1)}>Load more{page}</button>
-      )}
+      <Timer1 />
     </div>
   );
 }
+
+// export default function App() {
+//   const [clicks, setClicks] = useState(0);
+//   const [articles, setArticles] = useState([]);
+
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [error, setError] = useState(false);
+
+//   const [searchTerm, setSearchTerm] = useState("");
+//   const [page, setPage] = useState(1);
+
+//   const handleSearch = async (topic) => {
+//     console.log(`${topic}/${Date.now()}`);
+
+//     setSearchTerm(`${topic}/${Date.now()}`);
+
+//     setPage(1);
+//     setArticles([]);
+//   };
+
+//   useEffect(() => {
+//     if (searchTerm === "") {
+//       return;
+//     }
+//     async function getData() {
+//       try {
+//         setError(false);
+//         setIsLoading(true);
+//         console.log(searchTerm.split("/")[0]);
+
+//         const data = await fetchArticles(searchTerm.split("/")[0], page);
+
+//         setArticles((prevArticles) => {
+//           return [...prevArticles, ...data];
+//         });
+//       } catch {
+//         setError(true);
+//       } finally {
+//         setIsLoading(false);
+//       }
+//     }
+//     getData();
+//     console.log(page, searchTerm);
+//   }, [page, searchTerm]);
+//   // useEffect(() => {
+//   //   console.log(clicks);
+
+//   //   async function getArticles() {
+//   //     try {
+//   //       const data = await fetchArticles();
+//   //       console.log(data);
+//   //     } catch (error) {
+//   //       console.log(error);
+//   //     }
+//   //   }
+//   //   getArticles();
+//   // }, [clicks]);
+
+//   return (
+//     <div>
+//       <h1>HTTP</h1>
+//       <SearchForm onSearch={handleSearch} />
+
+//       {error && <b>Whops there was an error plz reload...</b>}
+
+//       {articles.length > 0 && <ArticleList items={articles} />}
+//       {isLoading && <b>Loading data, please wait...</b>}
+
+//       {articles.length > 0 && !isLoading && (
+//         <button onClick={() => setPage(page + 1)}>Load more{page}</button>
+//       )}
+//     </div>
+//   );
+// }
 
 // export default function App() {
 //   const [filter, setFilter] = useState("");
